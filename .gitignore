@@ -1,0 +1,3 @@
+# Ignorar as bases de dados
+DataSet_Loan/accepted_*/
+*.csv
