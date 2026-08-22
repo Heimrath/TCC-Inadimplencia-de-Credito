@@ -32,7 +32,7 @@ cols_importantes = [
     'loan_amnt', 'term', 'int_rate', 'grade', 'annual_inc', 'dti', 'loan_status',
     'emp_length', 'home_ownership', 'fico_range_low', 'fico_range_high',
     'open_acc', 'pub_rec', 'revol_util', 'total_acc', 'mort_acc',
-    'inq_last_6mths', 'pub_rec_bankruptcies'
+    'inq_last_6mths', 'pub_rec_bankruptcies', 'issue_d'
 ]
 
 # Navega para a pasta DataSet_Loan, entra na pasta extraída e aponta para o CSV bruto
