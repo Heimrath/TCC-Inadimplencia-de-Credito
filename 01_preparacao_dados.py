@@ -26,9 +26,10 @@ import polars as pl
 # inq_last_6mths       : Consultas de crédito nos últimos 6 meses.
 # pub_rec              : Número de registros públicos depreciativos (ex: execuções fiscais, penhoras).
 # pub_rec_bankruptcies : Número de registros de falência pública no nome do cliente.
+# issue_d              : Mês e ano em que o empréstimo foi originado. Utilizada exclusivamente para a separação temporal (out-of-time) dos conjuntos de treino e teste.
 # =======================================================================================
 
-cols_importantes = [
+important_cols = [
     'loan_amnt', 'term', 'int_rate', 'grade', 'annual_inc', 'dti', 'loan_status',
     'emp_length', 'home_ownership', 'fico_range_low', 'fico_range_high',
     'open_acc', 'pub_rec', 'revol_util', 'total_acc', 'mort_acc',
@@ -36,17 +37,17 @@ cols_importantes = [
 ]
 
 # Navega para a pasta DataSet_Loan, entra na pasta extraída e aponta para o CSV bruto
-caminho_csv = r'DataSet_Loan\accepted_2007_to_2018q4.csv\accepted_2007_to_2018Q4.csv'
+csv_path = r'DataSet_Loan\accepted_2007_to_2018q4.csv\accepted_2007_to_2018Q4.csv'
 
 # Salva o Parquet limpo e finalizado direto na raiz da pasta DataSet_Loan
-caminho_parquet = r'DataSet_Loan\base_credito_tcc.parquet'
+parquet_path = r'DataSet_Loan\base_credito_tcc.parquet'
 
 print("Lendo CSV, aplicando filtros e convertendo para Parquet...")
 
 (
-    pl.scan_csv(caminho_csv, ignore_errors=True)
+    pl.scan_csv(csv_path, ignore_errors=True)
     
-    .select(cols_importantes)
+    .select(important_cols)
     
     # Filtra os status 
     .filter(pl.col('loan_status').is_in(['Fully Paid', 'Charged Off']))
@@ -59,11 +60,9 @@ print("Lendo CSV, aplicando filtros e convertendo para Parquet...")
         .alias('target')
     )
     
-    
     .drop('loan_status')
     
-    
-    .sink_parquet(caminho_parquet)
+    .sink_parquet(parquet_path)
 )
 
-print(f"Sucesso! Arquivo gerado em: {caminho_parquet}")
+print(f"Sucesso! Arquivo gerado em: {parquet_path}")
