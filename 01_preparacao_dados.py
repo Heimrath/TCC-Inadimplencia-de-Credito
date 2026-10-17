@@ -37,10 +37,10 @@ important_cols = [
 ]
 
 # Navega para a pasta DataSet_Loan, entra na pasta extraída e aponta para o CSV bruto
-csv_path = r'DataSet_Loan\accepted_2007_to_2018q4.csv\accepted_2007_to_2018Q4.csv'
+csv_path = r'DataSet_Loan/accepted_2007_to_2018q4.csv/accepted_2007_to_2018Q4.csv'
 
 # Salva o Parquet limpo e finalizado direto na raiz da pasta DataSet_Loan
-parquet_path = r'DataSet_Loan\base_credito_tcc.parquet'
+parquet_path = r'DataSet_Loan/base_credito_tcc.parquet'
 
 print("Lendo CSV, aplicando filtros e convertendo para Parquet...")
 
